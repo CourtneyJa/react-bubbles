@@ -6,6 +6,15 @@ const Login = (props) => {
   // when you have handled the token, navigate to the BubblePage route
   const [data, setData] = useState({ username: "", password: "" });
 
+  const myStyle={
+    padding: '2%',
+    alignContent: 'center',
+    justifyItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    paddingLeft: '35%'
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
     axiosWithAuth()
@@ -26,26 +35,28 @@ const Login = (props) => {
   };
   return (
     <>
-      <h1>Welcome to the Bubble App!</h1>
-      <p>Build a login page here</p>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="username"
-            value={data.username}
-            name="username"
-            onChange={handleChange}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={data.password}
-            name="password"
-            onChange={handleChange}
-          />
-          <button type="submit">Enter</button>
-        </form>
+      <div style={myStyle}>
+        <h1>Welcome to the Bubble App!</h1>
+        <p>Build a login page here</p>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="username"
+              value={data.username}
+              name="username"
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              placeholder="password"
+              value={data.password}
+              name="password"
+              onChange={handleChange}
+            />
+            <button type="submit">Enter</button>
+          </form>
+        </div>
       </div>
     </>
   );
