@@ -11,6 +11,19 @@ const ColorList = ({ colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
+  //stretch
+  const [newColor, setNewColor]=useState({
+    color: '',
+    code: {hex: ''}
+  })
+
+  const addColor=e=>{
+    axiosWithAuth().post(`/api/colors/`, newColor )
+    .then (res=>updateColors([...colors, newColor], res.data))
+    .catch(err => console.log('cj: color post error', err))
+    e.preventDefault()
+  }
+
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
@@ -108,6 +121,21 @@ const ColorList = ({ colors, updateColors }) => {
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
+      <form onSubmit={addColor}>
+        <input name='color' value={newColor.code} onChange={(e) =>{
+          setNewColor({
+            ...newColor,
+            color: e.target.value
+          })
+        }}/>
+        <input name='color' value={newColor.code.hex} onChange={(e) =>{
+          setNewColor({
+            ...newColor,
+            code: {hex: e.target.value}
+          })
+        }}/>
+        <button type='submit'>Add New Color</button>
+      </form>
     </div>
   );
 };
